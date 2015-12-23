@@ -46,6 +46,42 @@
         // });
         //DONE! Fuck yea!
 
+        //now, whenever the button is clicked, save the index of the last tweet display in a variable
+        // var lastTweetIndex;
+
+        // var getLastTweet = function() {
+        //   lastTweetIndex = streams.home.length-1
+        //   return streams.home[streams.home.length-1]
+        // }
+
+        // $('button').on('click', function() {
+        //   var lastTweet = getLastTweet();
+        //   $body.append('<div>'+'@'+lastTweet.user+': '+lastTweet.message+'</div>')
+        //   console.log(lastTweetIndex)
+        // });
+        //DONE!
+
+        //now,whenever the button is click have it display all the new tweets
+        var lastTweet = streams.home.length-1;
+
+        var getNewTweets = function() {
+          var newTweets = '';
+
+          for (var i = lastTweet; i < streams.home.length-1; i++){
+            var newTweet = '';
+            newTweet = '<div>' + '@' + streams.home[i].user + ': ' + streams.home[i].message + '</div>'
+            newTweets += newTweet;
+          }
+
+          lastTweet = streams.home.length-1
+          return newTweets
+        };
+
+        $('button').on('click', function() {
+          var newTweets = getNewTweets();
+          $body.append(newTweets)
+        });
+
       });
 
     </script>
