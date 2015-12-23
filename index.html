@@ -15,53 +15,12 @@
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          console.log(tweet.created_at)
+          $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + tweet.created_at);
           $tweet.appendTo($body);
           index -= 1;
         }
 
-        //figure out how to have the display updated each second with 'i did it!'
-        //DONE!! Woohoo!
-        // for (var i = 3000; i < 14000; i+=1000) {
-        //   setTimeout(function() { $body.append('<div>'+'i did it!'+'</div>') }, i);
-        // }
-
-        //now make it so that when you click the button, it adds 'I did it'
-        //$('button').on('click', function() { $body.append('<div>'+'i did it!'+'</div>') })
-        //DONE! Hell yea!
-
-        //now, whenever the button is clicked, add a random tweet
-        // var randomTweet = streams.home[5];
-        // $('button').on('click', function() {
-        //   $body.append('<div>'+'@'+randomTweet.user+': '+randomTweet.message+'</div>')
-        // });
-
-        //now, whenever the button is clicked, add the most recent tweet
-        // var getLastTweet = function() {
-        //   return streams.home[streams.home.length-1]
-        // }
-        // $('button').on('click', function() {
-        //   var lastTweet = getLastTweet();
-        //   $body.append('<div>'+'@'+lastTweet.user+': '+lastTweet.message+'</div>')
-        // });
-        //DONE! Fuck yea!
-
-        //now, whenever the button is clicked, save the index of the last tweet display in a variable
-        // var lastTweetIndex;
-
-        // var getLastTweet = function() {
-        //   lastTweetIndex = streams.home.length-1
-        //   return streams.home[streams.home.length-1]
-        // }
-
-        // $('button').on('click', function() {
-        //   var lastTweet = getLastTweet();
-        //   $body.append('<div>'+'@'+lastTweet.user+': '+lastTweet.message+'</div>')
-        //   console.log(lastTweetIndex)
-        // });
-        //DONE!
-
-        //now,whenever the button is click have it display all the new tweets
         var lastTweet = streams.home.length-1;
 
         var getNewTweets = function() {
@@ -69,7 +28,7 @@
 
           for (var i = lastTweet; i < streams.home.length-1; i++){
             var newTweet = '';
-            newTweet = '<div>' + '@' + streams.home[i].user + ': ' + streams.home[i].message + '</div>'
+            newTweet = '<div>' + '@' + streams.home[i].user + ': ' + streams.home[i].message + ' ' + tweet.created_at + '</div>'
             newTweets += newTweet;
           }
 
