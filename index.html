@@ -6,11 +6,12 @@
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="lib/main.css">
   </head>
-  <header><h1>twittler</h1></header>
   <body>
-    <button type='button'>Show new tweets</button>
+    <header><h1>twittler</h1></header>
+    <div class="button"><button type='button'>new twits</button></div>
     <script>
 
       $(document).ready(function(){
@@ -45,6 +46,23 @@
           var newTweets = getNewTweets();
           $body.append(newTweets)
         });
+        
+        $('button').on('mouseenter', function() {
+          $(this).addClass('highlight');
+        });
+
+        $('button').on('mouseleave', function() {
+          $(this).removeClass('highlight');
+        });
+
+        $('h1').on('mouseenter', function() {
+          $(this).addClass('highlight');
+        });
+
+        $('h1').on('mouseleave', function() {
+          $(this).removeClass('highlight');
+        });
+
 
       });
 
