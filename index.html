@@ -21,11 +21,11 @@
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
-          console.log(tweet.created_at)
           $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + tweet.created_at);
           $tweet.appendTo($body);
           index -= 1;
         }
+
 
         var lastTweet = streams.home.length-1;
 
@@ -34,10 +34,9 @@
 
           for (var i = lastTweet; i < streams.home.length-1; i++){
             var newTweet = '';
-            newTweet = '<div>' + '@' + streams.home[i].user + ': ' + streams.home[i].message + ' ' + tweet.created_at + '</div>'
+            newTweet = '<div' + ' id=' + streams.home[i].user + '>' + '<button class="timeline" type="button">' + '@' + streams.home[i].user + '</button>' + ': ' + streams.home[i].message + ' ' + tweet.created_at + '</div>'
             newTweets += newTweet;
           }
-
           lastTweet = streams.home.length-1
           return newTweets
         };
@@ -45,6 +44,19 @@
         $('button').on('click', function() {
           var newTweets = getNewTweets();
           $body.append(newTweets)
+        
+          $('button').on('click', function() {
+            $(this).closest('#douglascalhoun').slideToggle('fast');
+           });
+
+          $('button').on('mouseenter', function() {
+            $(this).addClass('highlight');
+          });
+
+          $('button').on('mouseleave', function() {
+            $(this).removeClass('highlight');
+          });
+
         });
         
         $('button').on('mouseenter', function() {
@@ -62,6 +74,7 @@
         $('h1').on('mouseleave', function() {
           $(this).removeClass('highlight');
         });
+
 
 
       });
