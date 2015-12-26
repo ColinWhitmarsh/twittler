@@ -11,8 +11,9 @@
   </head>
   <body>
     <header><h1>twittler</h1></header>
-    <div class="button"><button type='button'>new twits</button></div>
+    <div class="button"><button class="newTwits" type='button'>new twits</button></div>
     <script>
+      var user = 'mracus'
 
       $(document).ready(function(){
         var $body = $('body');
@@ -20,9 +21,8 @@
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + tweet.created_at);
-          $tweet.appendTo($body);
+          var $tweet = '<div' + ' id=' + tweet.user + '>' + '<button class="timeline" type="button">' + '@' + tweet.user + '</button>' + ': ' + tweet.message + ' ' + tweet.created_at + '</div>'
+          $body.append($tweet);
           index -= 1;
         }
 
@@ -34,39 +34,46 @@
 
           for (var i = lastTweet; i < streams.home.length-1; i++){
             var newTweet = '';
-            newTweet = '<div' + ' id=' + streams.home[i].user + '>' + '<a class="timeline" href="userTimeline.html">' + '@' + streams.home[i].user + '</a>' + ': ' + streams.home[i].message + ' ' + tweet.created_at + '</div>'
+            newTweet = '<div' + ' id=' + streams.home[i].user + '>' + '<button class="timeline" type="button">' + '@' + streams.home[i].user + '</button>' + ': ' + streams.home[i].message + ' ' + tweet.created_at + '</div>'
             newTweets += newTweet;
           }
           lastTweet = streams.home.length-1
           return newTweets
         };
 
-
-
-        $('button').on('click', function() {
-          var newTweets = getNewTweets();
-          $body.append(newTweets)
-
-          $('button').on('mouseenter', function() {
-            $(this).addClass('highlight');
-          });
-
-          $('button').on('mouseleave', function() {
-            $(this).removeClass('highlight');
-          });
-
-        });
-        
-
-
-
-        $('button').on('mouseenter', function() {
+        $('button.timeline').on('mouseenter', function() {
           $(this).addClass('highlight');
         });
 
-        $('button').on('mouseleave', function() {
+        $('button.timeline').on('mouseleave', function() {
           $(this).removeClass('highlight');
         });
+
+        $('button.timeline').on('click', function() {
+          var user = $(this).closest('div').attr('id').toString();
+          $(this).closest('div').siblings().not('#' + user).slideToggle('fast');
+        });
+
+
+        $('button.newTwits').on('click', function() {
+          var newTweets = getNewTweets();
+          $body.append(newTweets)
+
+          $('button.timeline').on('mouseenter', function() {
+            $(this).addClass('highlight');
+          });
+
+          $('button.timeline').on('mouseleave', function() {
+            $(this).removeClass('highlight');
+          });
+
+          $('button.timeline').on('click', function() {
+            var user = $(this).closest('div').attr('id').toString();
+            $(this).closest('div').siblings().not('#' + user).slideToggle();
+          })
+
+        });
+        
 
         $('h1').on('mouseenter', function() {
           $(this).addClass('highlight');
