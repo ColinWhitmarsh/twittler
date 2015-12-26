@@ -34,20 +34,18 @@
 
           for (var i = lastTweet; i < streams.home.length-1; i++){
             var newTweet = '';
-            newTweet = '<div' + ' id=' + streams.home[i].user + '>' + '<button class="timeline" type="button">' + '@' + streams.home[i].user + '</button>' + ': ' + streams.home[i].message + ' ' + tweet.created_at + '</div>'
+            newTweet = '<div' + ' id=' + streams.home[i].user + '>' + '<a class="timeline" href="userTimeline.html">' + '@' + streams.home[i].user + '</a>' + ': ' + streams.home[i].message + ' ' + tweet.created_at + '</div>'
             newTweets += newTweet;
           }
           lastTweet = streams.home.length-1
           return newTweets
         };
 
+
+
         $('button').on('click', function() {
           var newTweets = getNewTweets();
           $body.append(newTweets)
-        
-          $('button').on('click', function() {
-            $(this).closest('#douglascalhoun').slideToggle('fast');
-           });
 
           $('button').on('mouseenter', function() {
             $(this).addClass('highlight');
@@ -59,6 +57,9 @@
 
         });
         
+
+
+
         $('button').on('mouseenter', function() {
           $(this).addClass('highlight');
         });
