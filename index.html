@@ -13,7 +13,6 @@
     <header><h1>twittler</h1></header>
     <div class="button"><button class="newTwits" type='button'>new twits</button></div>
     <script>
-      var user = 'mracus'
 
       $(document).ready(function(){
         var $body = $('body');
@@ -51,7 +50,7 @@
 
         $('button.timeline').on('click', function() {
           var user = $(this).closest('div').attr('id').toString();
-          $(this).closest('div').siblings().not('#' + user).slideToggle('fast');
+          $(this).closest('div').siblings('div').not('#' + user).slideToggle('fast');
         });
 
 
@@ -67,9 +66,11 @@
             $(this).removeClass('highlight');
           });
 
+          $('button.timeline').unbind('click');
+
           $('button.timeline').on('click', function() {
             var user = $(this).closest('div').attr('id').toString();
-            $(this).closest('div').siblings().not('#' + user).slideToggle();
+            $(this).closest('div').siblings('div').not('#' + user).slideToggle('fast');
           })
 
         });
