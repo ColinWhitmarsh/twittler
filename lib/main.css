@@ -39,11 +39,15 @@ button {
 }
 
 .timeline {
-	color: #666666;
+	color: #71fcff;
 	width: auto;
 	padding: 0;
 	background: #1e1e1e;
 	text-align: left;
+}
+
+.timeago {
+	color: #666666;
 }
 
 .highlight {

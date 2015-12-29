@@ -5,6 +5,7 @@
     <title>twittler</title>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="lib/timeago.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="lib/main.css">
@@ -20,22 +21,27 @@
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = '<div' + ' id=' + tweet.user + '>' + '<button class="timeline" type="button">' + '@' + tweet.user + '</button>' + ': ' + tweet.message + ' ' + tweet.created_at + '</div>'
+          var timestamp = tweet.created_at.toISOString();
+          var $tweet = '<div' + ' id=' + tweet.user + '>' + '<button class="timeline" type="button">' + '@' + tweet.user + '</button>' + ': ' + tweet.message + ' ' + '<abbr class="timeago" title=' + timestamp +'>' + timestamp + '</time>' + '</div>'
           $body.append($tweet);
           index -= 1;
         }
 
+        $("abbr.timeago").timeago();
 
         var lastTweet = streams.home.length-1;
+
 
         var getNewTweets = function() {
           var newTweets = '';
 
           for (var i = lastTweet; i < streams.home.length-1; i++){
-            var newTweet = '';
-            newTweet = '<div' + ' id=' + streams.home[i].user + '>' + '<button class="timeline" type="button">' + '@' + streams.home[i].user + '</button>' + ': ' + streams.home[i].message + ' ' + tweet.created_at + '</div>'
-            newTweets += newTweet;
+            var tweet = streams.home[i];
+            var timestamp = tweet.created_at.toISOString();
+            var $tweet = '<div' + ' id=' + tweet.user + '>' + '<button class="timeline" type="button">' + '@' + tweet.user + '</button>' + ': ' + tweet.message + ' ' + '<abbr class="timeago" title=' + timestamp +'>' + timestamp + '</time>' + '</div>'
+            newTweets += $tweet;
           }
+
           lastTweet = streams.home.length-1
           return newTweets
         };
@@ -72,6 +78,8 @@
             var user = $(this).closest('div').attr('id').toString();
             $(this).closest('div').siblings('div').not('#' + user).slideToggle('fast');
           })
+
+          $("abbr.timeago").timeago();
 
         });
         
