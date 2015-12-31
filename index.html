@@ -18,12 +18,20 @@
       $(document).ready(function(){
         var $body = $('body');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
+        var appendTweets = function(index) {
           var tweet = streams.home[index];
           var timestamp = tweet.created_at.toISOString();
-          var $tweet = '<div' + ' id=' + tweet.user + '>' + '<button class="timeline" type="button">' + '@' + tweet.user + '</button>' + ': ' + tweet.message + ' ' + '<abbr class="timeago" title=' + timestamp +'>' + timestamp + '</time>' + '</div>'
+          var $tweet = $('<div></div>');
+          $tweet.text(': ' + tweet.message + ' ');
+          $tweet.attr('id', tweet.user);
+          $tweet.prepend('<button class="timeline" type="button">' + '@' + tweet.user + '</button>')
+          $tweet.append('<abbr class="timeago" title=' + timestamp +'>' + timestamp + '</abbr>')
           $body.append($tweet);
+        }
+
+        var index = streams.home.length - 1;
+        while(index >= 0){
+          appendTweets(index);
           index -= 1;
         }
 
@@ -31,19 +39,11 @@
 
         var lastTweet = streams.home.length-1;
 
-
         var getNewTweets = function() {
-          var newTweets = '';
-
-          for (var i = lastTweet; i < streams.home.length-1; i++){
-            var tweet = streams.home[i];
-            var timestamp = tweet.created_at.toISOString();
-            var $tweet = '<div' + ' id=' + tweet.user + '>' + '<button class="timeline" type="button">' + '@' + tweet.user + '</button>' + ': ' + tweet.message + ' ' + '<abbr class="timeago" title=' + timestamp +'>' + timestamp + '</time>' + '</div>'
-            newTweets += $tweet;
+            for (var index = lastTweet; index < streams.home.length-1; index++){
+            appendTweets(index);
           }
-
           lastTweet = streams.home.length-1
-          return newTweets
         };
 
         $('button.timeline').on('mouseenter', function() {
