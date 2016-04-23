@@ -24,10 +24,10 @@
           var $tweet = $('<div></div>');
           $tweet.text(': ' + tweet.message + ' ');
           $tweet.attr('id', tweet.user);
-          $tweet.prepend('<button class="timeline" type="button">' + '@' + tweet.user + '</button>')
-          $tweet.append('<abbr class="timeago" title=' + timestamp +'>' + timestamp + '</abbr>')
+          $tweet.prepend('<button class="timeline" type="button">' + '@' + tweet.user + '</button>');
+          $tweet.append('<abbr class="timeago" title=' + timestamp +'>' + timestamp + '</abbr>');
           $body.append($tweet);
-        }
+        };
 
         var index = streams.home.length - 1;
         while(index >= 0){
@@ -43,7 +43,7 @@
             for (var index = lastTweet; index < streams.home.length-1; index++){
             appendTweets(index);
           }
-          lastTweet = streams.home.length-1
+          lastTweet = streams.home.length-1;
         };
 
         $('button.timeline').on('mouseenter', function() {
@@ -62,7 +62,7 @@
 
         $('button.newTwits').on('click', function() {
           var newTweets = getNewTweets();
-          $body.append(newTweets)
+          $body.append(newTweets);
 
           $('button.timeline').on('mouseenter', function() {
             $(this).addClass('highlight');
@@ -77,7 +77,7 @@
           $('button.timeline').on('click', function() {
             var user = $(this).closest('div').attr('id').toString();
             $(this).closest('div').siblings('div').not('#' + user).slideToggle('fast');
-          })
+          });
 
           $("abbr.timeago").timeago();
 
@@ -91,11 +91,7 @@
         $('h1').on('mouseleave', function() {
           $(this).removeClass('highlight');
         });
-
-
-
       });
-
     </script>
   </body>
 </html>
